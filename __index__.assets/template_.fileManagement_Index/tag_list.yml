@@ -5,14 +5,12 @@ tagList:
   # 索引
   k:
     describe: 密钥索引|key index
-    tagId: ""
     type: format
     resolution: |
       str "密钥索引"
       见File_Management密钥章节
   i:
-    describe: 识别符|identifier
-    tagId: ""
+    describe: 对象识别符|identifier
     type: format
     resolution: |
       str "识别符"
@@ -20,7 +18,6 @@ tagList:
   # 时间地点人物事件
   t:
     describe: 时间|time
-    tagId: ""
     type: format
     resolution: |
       str "年[.月][.日][..时][.分][.秒][.毫秒][-年][.月][.日][..时][.分][.秒]"
@@ -30,11 +27,11 @@ tagList:
         format> "年.月.日..时.分.秒.毫秒"
         
         exp> "2021.4"
-        exp> "2021.4.11"
-        exp> "2021.4.11..20.44.12"
-        exp> "2021.4.11..6.7.11.523">>>>>2021年4月11日6时7分1秒
+        exp> "2021.4.11">>>>>2021年4月11日
+        exp> "2021.4.11..20.44.12">>>>>2021年4月11日20时44分12秒
+        exp> "2021.4.11..6.7.11.523">>>>>2021年4月11日6时7分11秒523毫秒
       # 时间段格式
-        format>"开始时间..结束时间"
+        format>"开始时间-结束时间"
         时间取其精度范围的起始。
 
         exp> "2021.4.11-2022.2.4"
@@ -47,8 +44,8 @@ tagList:
         A代表(月:6-9月|日:下旬|时:下午12-18时|分:30-45分|秒:30-45秒)
         B代表(月:9-12月|日:None|时:夜晚18-24时|分:45-60分|秒:45-60秒)
         
-        exp> "2021.1.1..B"2021年1月1日上午(6-12点)
-        exp> "2021.A-C"2021年1月1日至2021年6月1日
+        exp> "2021.1.1..B">>>>>2021年1月1日上午(6-12点)
+        exp> "2021.A-C">>>>>2021年1月1日至2021年6月1日
       ## 时间段省略写法
         当时间段起始与终止时间的前段相同且精度相同时，终止时间可以省略前段。
         exp> "2021.4.11-2021.5.24">>>>>"2021.4.11-5.24"
@@ -57,7 +54,6 @@ tagList:
       预定义的事件有(c:创建时间|m:更改时间|t:文件/文件夹内容(或相应事件)对应时期)，事件可以自定义。
   p:
     describe: 地点|place
-    tagId: ""
     type: format
     resolution: |
       str "地址"
@@ -67,7 +63,6 @@ tagList:
       [北京市东城区,116.403766,39.922904]
   c:
     describe: 人物|Charater
-    tagId: ""
     type: free
     resolution: |
       (RECOMMENDED)
@@ -75,47 +70,35 @@ tagList:
       list [**str "人名"]
   e:
     describe: 事件|event
-    tagId: ""
     type: free
     resolution: |
       (RECOMMENDED)
       str "事件"
       list [**str 事件]
 # 描述
-  s:
-    describe: 来源|source
-    tagId: ""
-    type: free
-    resolution: |
-      (RECOMMENDED)
-      str "来源"
-      list [**str 来源]
   h:
     describe: 标题|heading
-    tagId: ""
     type: free
     resolution: |
       (RECOMMENDED)
       str "标题"
   m:
     describe: 注释|message
-    tagId: ""
     type: free
     resolution: |
       (RECOMMENDED)
       str "注释"
   w:
     describe: 警告|warning
-    tagId: ""
     type: free
     resolution: |
       (RECOMMENDED)
       str "警告"
 
       当该文件有安全风险或存在分级内容时，应添加此标签予以警告。
+  # 额外信息
   x:
     describe: 外置信息|extension, 将长信息存入tag_extension.yml, 避免文件名长度过长。
-    tagId: ""
     type: format
     resolution: |
       str "索引字符串"
@@ -126,7 +109,6 @@ tagList:
       解析时，以索引字符串注意解析。
   xt:
     describe: 外置标签|extra tag, 将长标签存入tag_extension.yml, 避免文件名长度过长。
-    tagId: ""
     type: format
     resolution: |
       str "索引字符串"
@@ -135,18 +117,9 @@ tagList:
       # 索引字符串
       将索引字符串作为键, 长标签(以字典形式)作为值存入tag_extension.yml中。
       解析时，则以索引字符串取出字典，字典第一层的键视作标签。
-  l:
-    describe: 链接|link
-    tagId: ""
-    type: free
-    resolution: |
-      (RECOMMENDED)
-      str "链接"
-      list [**str "链接"]
   # 创作
   a:
     describe: 作者(创作者/创建者)|author
-    tagId: ""
     type: free
     resolution: |
       (RECOMMENDED)
@@ -154,7 +127,6 @@ tagList:
       list [**str "人名"]
   v:
     describe: 版本|version
-    tagId: ""
     type: format
     resolution: |
       str "版本"
@@ -163,15 +135,13 @@ tagList:
 # --------------------模板--------------------
 # ============================================
   # 标签1:
-  #   describe: "" # 必填，标签描述
-  #   tagId: "" # 选填，标签唯一识别符，将标签信息打包为字符串格式(utf-8)后产生的sha-256值(小写)。字符串格式为"[%s,%s,%s,%s]"%(key,value['describe'],value['type'],value['resolution'])
-  #   type: "" # 必填，"fixed":固定标签|"format":格式标签|"free":自由标签
-  #   resolution: "" # 选填，标签字典化后，进一步标准化的方式(包括如何额外信息，格式标签的格式也在此说明)
+  #   describe: "" # 标签描述
+  #   type: "" # "fixed":固定标签|"format":格式标签|"free":自由标签
+  #   resolution: "" # 内容解析方案/建议(如tag_extension.yml使用方式，format标签格式)
   # 标签2:
-  #   describe: "" # 必填，标签描述
-  #   tagId: "" # 选填，标签唯一识别符，将标签信息打包为字符串格式(utf-8)后产生的sha-256值(小写)。字符串格式为"[%s,%s,%s,%s]"%(key,value['describe'],value['type'],value['resolution'])
-  #   type: "" # 必填，"fixed":固定标签|"format":格式标签|"free":自由标签
-  #   resolution: "" # 选填，标签字典化后，进一步标准化的方式(包括如何额外信息，格式标签的格式也在此说明)
+  #   describe: "" # 标签描述
+  #   type: "" # "fixed":固定标签|"format":格式标签|"free":自由标签
+  #   resolution: "" # 内容解析方案/建议(如tag_extension.yml使用方式，format标签格式)
 # ============================================
 # --------------------附录--------------------
 # ============================================
