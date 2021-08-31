@@ -1,7 +1,7 @@
-# File_Management
+# FileManagement
 
-* 版本——alpha
-* 声明——Tiki_Essential直属模组, 许可协议: IceTiki [知识共享 署名-相同方式共享 4.0协议](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 2021
+* 版本——1.0.0-alpha
+* 声明——TikiEssential节, 许可协议: IceTiki [知识共享 署名-相同方式共享 4.0协议](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 2021
 * 范围——私有储存空间
 * 效果——围绕"效率、秩序、安全"标准化文件管理
 
@@ -10,7 +10,7 @@
 文件列表
 
 > * *.git
-> * \_\_index\_\_.md     >>>>>     模组主体文件的副本
+> * index.md     >>>>>     模组主体文件的副本
 > * backup.md     >>>>>     备份说明
 
 ## 调用
@@ -74,8 +74,8 @@ graph RL
             Backup
             Domain[(Domain)]-->|封存|Archive
             Archive-->|复出|Domain
-            Domain-->|备份|Backup
-            Archive-->|备份|Backup
+            Domain-.->|备份|Backup
+            Archive-.->|备份|Backup
         end
      end
     subgraph 机制
@@ -174,7 +174,7 @@ click 对象 "#对象" _blank
 标签([格式](#标签格式))是文件信息的摘要，提高文件搜索效率。
 
 * 在对象内部使用标签时，需要(MUST)先将其加入到[索引](#说明_索引)的tag_list.yml。
-* [标准标签](__index__.assets\template_.fileManagement_Index\tag_list.yml)是必须(MUST)使用的标签，自定义标签可以根据模板编写。
+* [标准标签](index.assets\template_.fileManagement_Index\tag_list.yml)是必须(MUST)使用的标签，自定义标签可以根据模板编写。
 * 考虑到文件名长度限制，过长的信息可以储存在[索引](#说明_索引)的tag_extension.yml。详细方式记录在tag_list.yml中。
 
 ## <span id='加密'>加密</span>
@@ -188,7 +188,7 @@ click 对象 "#对象" _blank
 
 ## <span id=工具>工具</span>
 
-https://github.com/IceTiki/Tiki_Essential_Tools
+https://github.com/IceTiki/TikiEssential_Tools
 
 # 附录
 
@@ -255,7 +255,7 @@ https://github.com/IceTiki/Tiki_Essential_Tools
 
 #### <span id='说明_索引'>索引</span>
 
-索引是名为```.fileManagement_Index```文件夹([模板](__index__.assets/template_.fileManagement_Index)，[生成工具](#自动工具))，保存对象的元信息。
+索引是名为```.fileManagement_Index```文件夹([模板](index.assets/template_.fileManagement_Index)，[生成工具](#自动工具))，保存对象的元信息。
 
 * ```index.yml```——此区域的信息
 * ```tag_list.yml```——此区域通行的[标签](#标签)列表
@@ -381,7 +381,7 @@ for i in range(60):
 > * Entertainment
 >   * minecraft
 >   * ...
-> * Assist_File
+> * AssistFile
 >   * icon
 >   * script
 >   * ...
