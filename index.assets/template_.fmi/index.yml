@@ -1,0 +1,7 @@
+file_management_version: '1.0.0-beta' # 文件管理的版本
+title: '' # 标题
+description: '' # 对此区域的描述
+creator: '' # 创建者
+created_time: '' # 创建时间(格式 YYYY-MM-DD HH:MM:SS)
+id: '' # 对象识别号
+status_id: '' # 对象状态识别号——128位16进制(小写字母)随机字符串，在创建/更新对象时随机生成

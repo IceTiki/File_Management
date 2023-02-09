@@ -1,6 +1,6 @@
 # FileManagement
 
-* 版本——1.0.0-alpha
+* 版本——1.0.0-beta
 * 声明——TikiEssential节, 许可协议: IceTiki [知识共享 署名-相同方式共享 4.0协议](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 2021
 * 范围——私有储存空间
 * 效果——围绕"效率、秩序、安全"标准化文件管理
@@ -154,7 +154,7 @@ click 对象 "#对象" _blank
 >
 > 1. 可变对象的增量备份，(RECOMMENDED)建议添加```A_```前缀
 > 2. 不可变对象的备份，(RECOMMENDED)建议添加```I<保存年限>_```前缀
-> 3. 可变对象的快照备份，(RECOMMENDED)建议添加```M<保存年限>_<备份时间>_```前缀(备份时间的格式建议参照[标准标签](index.assets\template_.fileManagement_Index\tag_list.yml)中的时间标签(t))
+> 3. 可变对象的快照备份，(RECOMMENDED)建议添加```M<保存年限>_<备份时间>_```前缀(备份时间的格式建议参照[标准标签](index.assets\template_.fmi\tag_list.yml)中的时间标签(t))
 
 ## <span id='对象'>对象</span>
 
@@ -175,7 +175,7 @@ click 对象 "#对象" _blank
 标签([格式](#标签格式))是文件信息的摘要，提高文件搜索效率。
 
 * 在对象内部使用标签时，需要(MUST)先将其加入到[索引](#说明_索引)的tag_list.yml。
-* [标准标签](index.assets\template_.fileManagement_Index\tag_list.yml)是必须(MUST)使用的标签，自定义标签可以根据模板编写。
+* [标准标签](index.assets\template_.fmi\tag_list.yml)是必须(MUST)使用的标签，自定义标签可以根据模板编写。
 * 考虑到文件名长度限制，过长的信息可以储存在[索引](#说明_索引)的tag_extension.yml。详细方式记录在tag_list.yml中。
 
 ## <span id='加密'>加密</span>
@@ -256,7 +256,7 @@ https://github.com/IceTiki/TikiEssential_Tools
 
 #### <span id='说明_索引'>索引</span>
 
-索引是名为```.fileManagement_Index```文件夹([模板](index.assets/template_.fileManagement_Index)，[生成工具](#自动工具))，保存对象的元信息。
+索引是名为```.fmi_<id>```文件夹([模板](index.assets/template_.fmi)，[生成工具](#自动工具))，保存对象的元信息。
 
 * ```index.yml```——此区域的信息
 * ```tag_list.yml```——此区域通行的[标签](#标签)列表
